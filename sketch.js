@@ -8,5 +8,6 @@ function setup() {
 }
 
 function draw() {
-    new Box().Box(10,10)
+    new Box().BoxStyle(10,10)
+    new Box().splinter(100,100,100)
 }
