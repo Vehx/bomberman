@@ -23,24 +23,7 @@ class Box {
             line(x2, y2 + index, box2size + x2, y2 + index);
 
         }
-    }
-    splinter(start,x, y){
-        const size = this.boxsize;
-        fill(this.background)
-        stroke(this.background)
-       
-        beginShape();
-        //      x     y
-        //start position
-        vertex(start,start);
-        //direccton
-        vertex(x-3,y+10);
-        //length
-        vertex(x+0, y+30);
-        //direction
-        vertex(x+2, y+10);
-        endShape()
-      
-    }
+    } 
+
 
 }
