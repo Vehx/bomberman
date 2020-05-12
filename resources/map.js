@@ -7,9 +7,13 @@ class Map {
 
     draw() {
         // background color
-        fill(50, 255, 50);
+        fill(110, 255, 60);
         // full background
         rect(0, 0, this.sizeWidth, this.sizeHeight);
+
+        // edge color
+        fill(50, 50, 50);
+        stroke(50, 50, 50);
 
         // top edge
         rect(0, 0, this.sizeWidth, this.laneSize);
@@ -18,10 +22,20 @@ class Map {
         rect(0, this.sizeHeight - this.laneSize, this.sizeWidth, this.laneSize);
 
         // rigt edge
-        rect(this.sizeWidth - this.laneSize, 0, this.laneSize, this.sizeHeight);
+        rect(
+            this.sizeWidth - this.laneSize,
+            0 + this.laneSize,
+            this.laneSize,
+            this.sizeHeight - this.laneSize * 2
+        );
 
         //left edge
-        rect(0, 0, this.laneSize, this.sizeHeight);
+        rect(
+            0,
+            0 + this.laneSize,
+            this.laneSize,
+            this.sizeHeight - this.laneSize * 2
+        );
     }
 
     generate() {}
