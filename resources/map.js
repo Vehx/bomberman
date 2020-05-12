@@ -1,9 +1,16 @@
 class Map {
     constraints;
-    constructor(sizeHeight, sizeWidth, walls, boxes, edgeColor = 50) {
+    constructor(
+        sizeHeight,
+        sizeWidth,
+        walls,
+        boxes,
+        laneSize = 40,
+        edgeColor = 50
+    ) {
         this.sizeHeight = sizeHeight;
         this.sizeWidth = sizeWidth;
-        this.laneSize = 40;
+        this.laneSize = laneSize;
         this.walls = walls;
         this.boxes = boxes;
         this.edgeColor = edgeColor;
