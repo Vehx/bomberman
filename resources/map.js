@@ -1,8 +1,11 @@
 class Map {
-    constructor(sizeHeight, sizeWidth) {
+    constraints;
+    constructor(sizeHeight, sizeWidth, walls, boxes) {
         this.sizeHeight = sizeHeight;
         this.sizeWidth = sizeWidth;
         this.laneSize = 40;
+        this.walls = walls;
+        this.boxes = boxes;
     }
 
     draw() {
