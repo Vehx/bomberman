@@ -47,7 +47,22 @@ class Map {
             this.laneSize,
             this.sizeHeight - this.laneSize * 2
         );
+        this.generate();
     }
 
-    generate() {}
+    generate() {
+        for (
+            let i = this.laneSize;
+            i < this.sizeHeight - this.laneSize;
+            i += this.laneSize
+        ) {
+            for (
+                let j = this.laneSize;
+                j < this.sizeWidth - this.laneSize;
+                j += this.laneSize
+            ) {
+                new Box().BoxStyle(j, i);
+            }
+        }
+    }
 }
