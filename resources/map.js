@@ -1,11 +1,12 @@
 class Map {
     constraints;
-    constructor(sizeHeight, sizeWidth, walls, boxes) {
+    constructor(sizeHeight, sizeWidth, walls, boxes, edgeColor = 50) {
         this.sizeHeight = sizeHeight;
         this.sizeWidth = sizeWidth;
         this.laneSize = 40;
         this.walls = walls;
         this.boxes = boxes;
+        this.edgeColor = edgeColor;
     }
 
     draw() {
@@ -15,8 +16,8 @@ class Map {
         rect(0, 0, this.sizeWidth, this.sizeHeight);
 
         // edge color
-        fill(50, 50, 50);
-        stroke(50, 50, 50);
+        fill(this.edgeColor);
+        stroke(this.edgeColor);
 
         // top edge
         rect(0, 0, this.sizeWidth, this.laneSize);
