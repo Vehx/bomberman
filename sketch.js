@@ -1,15 +1,13 @@
-function preload(){
+function preload() {
     // if there is assets like images that need to loadead before setup or draw
-  
 }
 
 function setup() {
     createCanvas(640, 480);
-
+    gameMap = new Map(height, width);
+    const generatedMap = gameMap.generate();
 }
 
 function draw() {
-   /*  new Box().BoxStyle(10,10)
-    new Box().splinter(100,100,100) */
-    new Box().splinter(20,20)
+    gameMap.draw();
 }
