@@ -49,14 +49,12 @@ class Map {
             this.sizeHeight - this.laneSize * 2
         );
 
+        // draws out boxes from generated map
+        // TODO add walls
         for (let i = 0; i < this.currentMap.length; i++) {
-            // console.log(this.currentMap[i]);
-
             for (let j = 0; j < this.currentMap[i].length; j++) {
                 switch (this.currentMap[i][j]) {
                     case "b":
-                        // console.log("Box");
-
                         new Box().BoxStyle(
                             j * this.laneSize,
                             i * this.laneSize
@@ -113,6 +111,8 @@ class Map {
         //         new Box().BoxStyle(j, i);
         //     }
         // }
+
+        // gets a new map and changes some squares of the play field to be walls and empty space
         let createdMap = this.createMap();
         createdMap[1][1] = "p";
         createdMap[1][2] = "s";
@@ -124,7 +124,7 @@ class Map {
     }
 
     createMap() {
-        // test generation of map template array, can maybe be used for constraints
+        // generates a new map, currently static, will fill entire play field with boxes
         let totalRows = floor(this.sizeHeight / this.laneSize);
         let lengthOfRows = floor(this.sizeWidth / this.laneSize);
         let currentRow = [];
@@ -141,18 +141,12 @@ class Map {
                 } else {
                     currentRow[j] = "b";
                 }
-                // console.log(currentRow[j]);
             }
-            // console.log(currentRow);
             this.constraints.push(currentRow);
             this.currentMap.push(currentRow);
             newMap.push(currentRow);
             currentRow = [];
         }
-        // console.log(this.constraints);
-
-        // return "test";
         return newMap;
-        // return this.constraints;
     }
 }
