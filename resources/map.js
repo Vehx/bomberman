@@ -55,10 +55,11 @@ class Map {
             for (let j = 0; j < this.currentMap[i].length; j++) {
                 switch (this.currentMap[i][j]) {
                     case "b":
-                        new Box().BoxStyle(
+                        new Box(
+                            this.laneSize,
                             j * this.laneSize,
                             i * this.laneSize
-                        );
+                        ).BoxStyle();
                         break;
                     default:
                         break;
