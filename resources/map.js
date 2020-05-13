@@ -58,8 +58,8 @@ class Map {
                         // console.log("Box");
 
                         new Box().BoxStyle(
-                            i * this.laneSize,
-                            j * this.laneSize
+                            j * this.laneSize,
+                            i * this.laneSize
                         );
                         break;
                     default:
