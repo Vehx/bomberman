@@ -61,6 +61,13 @@ class Map {
                             i * this.laneSize
                         ).BoxStyle();
                         break;
+                    case "w":
+                        new Wall(
+                            this.laneSize,
+                            j * this.laneSize,
+                            i * this.laneSize
+                        ).draw();
+                        break;
                     default:
                         break;
                 }
@@ -120,7 +127,7 @@ class Map {
         createdMap[2][1] = "s";
         createdMap[2][2] = "w";
         createdMap[2][4] = "w";
-        createdMap[1][1] = "w";
+        // createdMap[1][1] = "w";
         return createdMap;
     }
 
