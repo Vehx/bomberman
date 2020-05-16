@@ -51,28 +51,28 @@ class Map {
 
         // draws out boxes from generated map
         // TODO add walls
-        for (let i = 0; i < this.currentMap.length; i++) {
-            for (let j = 0; j < this.currentMap[i].length; j++) {
-                switch (this.currentMap[i][j]) {
-                    case "b":
-                        new Box(
-                            this.laneSize,
-                            j * this.laneSize,
-                            i * this.laneSize
-                        ).BoxStyle();
-                        break;
-                    case "w":
-                        new Wall(
-                            this.laneSize,
-                            j * this.laneSize,
-                            i * this.laneSize
-                        ).draw();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
+        // for (let i = 0; i < this.currentMap.length; i++) {
+        //     for (let j = 0; j < this.currentMap[i].length; j++) {
+        //         switch (this.currentMap[i][j]) {
+        //             case "b":
+        //                 new Box(
+        //                     this.laneSize,
+        //                     j * this.laneSize,
+        //                     i * this.laneSize
+        //                 ).BoxStyle();
+        //                 break;
+        //             case "w":
+        //                 new Wall(
+        //                     this.laneSize,
+        //                     j * this.laneSize,
+        //                     i * this.laneSize
+        //                 ).draw();
+        //                 break;
+        //             default:
+        //                 break;
+        //         }
+        //     }
+        // }
     }
 
     generate() {
