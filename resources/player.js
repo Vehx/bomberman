@@ -13,7 +13,7 @@ class Player {
 
     playerWalk() {
         if (keyIsDown(LEFT_ARROW)) {
-            if (this.x > this.size) {
+            if (this.x > 0 + this.size / 2) {
                 this.x = this.x - 2;
                 //for when the hattip rotates
                 this.degres = 180;
@@ -23,7 +23,7 @@ class Player {
         }
 
         if (keyIsDown(RIGHT_ARROW)) {
-            if (this.x < width - this.size) {
+            if (this.x < width - this.size / 2) {
                 this.x = this.x + 2;
                 this.degres = 0;
                 this.xTipPosistion = -this.xTip;
@@ -32,7 +32,7 @@ class Player {
         }
 
         if (keyIsDown(UP_ARROW)) {
-            if (this.y > this.size) {
+            if (this.y > 0 + this.size / 2) {
                 this.y = this.y - 2;
                 this.degres = 270;
                 this.xTipPosistion = -this.xTip;
@@ -41,7 +41,7 @@ class Player {
         }
 
         if (keyIsDown(DOWN_ARROW)) {
-            if (this.y < height - this.size) {
+            if (this.y < height - this.size / 2) {
                 this.y = this.y + 2;
                 this.degres = 90;
                 this.xTipPosistion = this.xTip;
@@ -89,5 +89,27 @@ class Player {
     }
     posistionY() {
         return this.y;
+    }
+
+    checkCollision(other) {
+        // console.log(
+        //     this.x + this.size >= other.x,
+        //     this.x <= other.x + other.size,
+        //     this.y + this.h >= other.y,
+        //     this.y <= other.y + other.size
+        // );
+        if (
+            // checks if right edge hits others left edge
+            this.x + this.size / 2 >= other.x &&
+            // checks if left edge hits others right edge
+            this.x - this.size / 2 <= other.x + other.size &&
+            // checks if top edge hits others bottom edge
+            this.y + this.size / 2 >= other.y &&
+            // checks if bottom edge hits others top edge
+            this.y - this.size / 2 <= other.y + other.size
+        ) {
+            return true;
+        }
+        return false;
     }
 }

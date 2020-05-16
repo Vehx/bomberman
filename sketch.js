@@ -20,11 +20,11 @@ function draw() {
     let p1x = player1.posistionX();
     let p1y = player1.posistionY();
     player1.playerWalk();
-    if (player1.intersects(box1) || player1.intersects(wall1)) {
-        // if (player1.intersects(box1)) {
+    if (player1.checkCollision(box1) || player1.checkCollision(wall1)) {
+        // if (player1.checkCollision(box1)) {
         player1.x = p1x;
         player1.y = p1y;
-        console.log("intersect");
+        console.log("collision");
     }
     player1.playerShow();
 
