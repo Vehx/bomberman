@@ -1,6 +1,6 @@
 class Box {
-    constructor(_boxsize, positionX, positionY) {
-        this.boxsize = _boxsize;
+    constructor(_size, positionX, positionY) {
+        this.size = _size;
         this.x = positionX;
         this.y = positionY;
         this.curvs = 2;
@@ -14,7 +14,7 @@ class Box {
 
         let x2 = this.x + 4;
         let y2 = this.y + 4;
-        const box1size = this.boxsize;
+        const box1size = this.size;
         const box2size = box1size - 8;
         const lines = 6;
 
