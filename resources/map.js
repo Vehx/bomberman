@@ -1,20 +1,12 @@
 class Map {
-    constructor(
-        sizeHeight,
-        sizeWidth,
-        walls,
-        boxes,
-        laneSize = 40,
-        edgeColor = 50
-    ) {
+    constructor(sizeHeight, sizeWidth, laneSize = 40, edgeColor = 50) {
         this.sizeHeight = sizeHeight;
         this.sizeWidth = sizeWidth;
         this.laneSize = laneSize;
-        this.walls = walls;
-        this.boxes = boxes;
         this.edgeColor = edgeColor;
         this.constraints = [];
         this.currentMap = [];
+        this.spawns = [];
     }
 
     draw() {
@@ -105,11 +97,19 @@ class Map {
                             i * this.laneSize
                         );
                         break;
+                    case "p":
+                        this.spawns.push([
+                            i * this.laneSize,
+                            j * this.laneSize,
+                        ]);
+                        break;
+
                     default:
                         break;
                 }
             }
         }
+        console.log(this.spawns);
         console.log(this.constraints);
         console.log(this.currentMap[3][3]);
 
