@@ -23,56 +23,11 @@ class Map {
         // full background
         rect(0, 0, this.sizeWidth, this.sizeHeight);
 
-        // edge color
-        // fill(this.edgeColor);
-        // stroke(this.edgeColor);
-
-        // // top edge
-        // rect(0, 0, this.sizeWidth, this.laneSize);
-
-        // // bottom edge
-        // rect(0, this.sizeHeight - this.laneSize, this.sizeWidth, this.laneSize);
-
-        // // rigt edge
-        // rect(
-        //     this.sizeWidth - this.laneSize,
-        //     0 + this.laneSize,
-        //     this.laneSize,
-        //     this.sizeHeight - this.laneSize * 2
-        // );
-
-        // //left edge
-        // rect(
-        //     0,
-        //     0 + this.laneSize,
-        //     this.laneSize,
-        //     this.sizeHeight - this.laneSize * 2
-        // );
-
-        // draws out boxes from generated map
+        // draws everything from the map
         for (let i = 0; i < this.currentMap.length; i++) {
             for (let j = 0; j < this.currentMap[i].length; j++) {
-                switch (this.currentMap[i][j]) {
-                    case "b":
-                        this.constraints.push(
-                            new Box(
-                                this.laneSize,
-                                j * this.laneSize,
-                                i * this.laneSize
-                            ).BoxStyle()
-                        );
-                        break;
-                    case "w":
-                        this.constraints.push(
-                            new Wall(
-                                this.laneSize,
-                                j * this.laneSize,
-                                i * this.laneSize
-                            ).draw()
-                        );
-                        break;
-                    default:
-                        break;
+                if (typeof this.currentMap[i][j].show === "function") {
+                    this.currentMap[i][j].show();
                 }
             }
         }
@@ -130,6 +85,34 @@ class Map {
         createdMap[2][1] = "s";
         createdMap[2][2] = "w";
         createdMap[2][4] = "w";
+        console.log(createdMap);
+
+        // draws out boxes from generated map
+        for (let i = 0; i < this.currentMap.length; i++) {
+            for (let j = 0; j < this.currentMap[i].length; j++) {
+                switch (this.currentMap[i][j]) {
+                    case "b":
+                        this.constraints[i][j] = new Box(
+                            this.laneSize,
+                            j * this.laneSize,
+                            i * this.laneSize
+                        );
+                        break;
+                    case "w":
+                        this.constraints[i][j] = new Wall(
+                            this.laneSize,
+                            j * this.laneSize,
+                            i * this.laneSize
+                        );
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        console.log(this.constraints);
+        console.log(this.currentMap[3][3]);
+
         return createdMap;
     }
 
