@@ -9,7 +9,7 @@ class Map {
         this.spawns = [];
     }
 
-    draw() {
+    show() {
         // background color
         fill(110, 255, 60);
         // full background

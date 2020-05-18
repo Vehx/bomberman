@@ -9,5 +9,5 @@ function setup() {
 }
 
 function draw() {
-    gameMap.draw();
+    gameMap.show();
 }
