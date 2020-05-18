@@ -7,7 +7,7 @@ class Wall {
         this.background = color(122, 118, 118);
     }
 
-    draw() {
+    show() {
         let x2 = this.x + 3;
         let y2 = this.y + 3;
         const innerSize = this.size - 6;
