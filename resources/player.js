@@ -2,6 +2,8 @@ class Player {
     constructor(_x, _y, size, color) {
         this.x = _x;
         this.y = _y;
+        this.prevX = _x;
+        this.prevY = _y;
         this.size = size;
         this.hatColor = color;
         this.degres = 0;
@@ -11,7 +13,7 @@ class Player {
         this.yTipPosistion = -_y;
     }
 
-    playerWalk() {
+    walk() {
         if (keyIsDown(LEFT_ARROW)) {
             if (this.x > 0 + this.size / 2) {
                 this.x = this.x - 2;
@@ -71,7 +73,7 @@ class Player {
         pop();
     }
 
-    playerShow() {
+    show() {
         let xPosition = this.x;
         let yPosition = this.y;
         stroke(0);
@@ -89,6 +91,11 @@ class Player {
     }
     posistionY() {
         return this.y;
+    }
+
+    savePos() {
+        this.prevX = this.x;
+        this.prevY = this.y;
     }
 
     checkCollision(other) {
