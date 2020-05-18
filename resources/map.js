@@ -24,42 +24,52 @@ class Map {
         rect(0, 0, this.sizeWidth, this.sizeHeight);
 
         // edge color
-        fill(this.edgeColor);
-        stroke(this.edgeColor);
+        // fill(this.edgeColor);
+        // stroke(this.edgeColor);
 
-        // top edge
-        rect(0, 0, this.sizeWidth, this.laneSize);
+        // // top edge
+        // rect(0, 0, this.sizeWidth, this.laneSize);
 
-        // bottom edge
-        rect(0, this.sizeHeight - this.laneSize, this.sizeWidth, this.laneSize);
+        // // bottom edge
+        // rect(0, this.sizeHeight - this.laneSize, this.sizeWidth, this.laneSize);
 
-        // rigt edge
-        rect(
-            this.sizeWidth - this.laneSize,
-            0 + this.laneSize,
-            this.laneSize,
-            this.sizeHeight - this.laneSize * 2
-        );
+        // // rigt edge
+        // rect(
+        //     this.sizeWidth - this.laneSize,
+        //     0 + this.laneSize,
+        //     this.laneSize,
+        //     this.sizeHeight - this.laneSize * 2
+        // );
 
-        //left edge
-        rect(
-            0,
-            0 + this.laneSize,
-            this.laneSize,
-            this.sizeHeight - this.laneSize * 2
-        );
+        // //left edge
+        // rect(
+        //     0,
+        //     0 + this.laneSize,
+        //     this.laneSize,
+        //     this.sizeHeight - this.laneSize * 2
+        // );
 
         // draws out boxes from generated map
-        // TODO add walls
         for (let i = 0; i < this.currentMap.length; i++) {
             for (let j = 0; j < this.currentMap[i].length; j++) {
                 switch (this.currentMap[i][j]) {
                     case "b":
-                        new Box(
-                            this.laneSize,
-                            j * this.laneSize,
-                            i * this.laneSize
-                        ).BoxStyle();
+                        this.constraints.push(
+                            new Box(
+                                this.laneSize,
+                                j * this.laneSize,
+                                i * this.laneSize
+                            ).BoxStyle()
+                        );
+                        break;
+                    case "w":
+                        this.constraints.push(
+                            new Wall(
+                                this.laneSize,
+                                j * this.laneSize,
+                                i * this.laneSize
+                            ).draw()
+                        );
                         break;
                     default:
                         break;
@@ -120,7 +130,6 @@ class Map {
         createdMap[2][1] = "s";
         createdMap[2][2] = "w";
         createdMap[2][4] = "w";
-        createdMap[1][1] = "w";
         return createdMap;
     }
 
@@ -138,7 +147,7 @@ class Map {
                     j === 0 ||
                     j === lengthOfRows - 1
                 ) {
-                    currentRow[j] = "x";
+                    currentRow[j] = "w";
                 } else {
                     currentRow[j] = "b";
                 }
