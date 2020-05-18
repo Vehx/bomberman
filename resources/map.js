@@ -59,12 +59,6 @@ class Map {
                 }
             }
         }
-        console.log(this.spawns);
-        console.log(this.constraints);
-        console.log(this.currentMap[1][1]);
-        console.log(this.currentMap[1][2]);
-        console.log(this.currentMap[2][1]);
-
         return createdMap;
     }
 
@@ -73,7 +67,6 @@ class Map {
         let totalRows = floor(this.sizeHeight / this.laneSize);
         let lengthOfRows = floor(this.sizeWidth / this.laneSize);
         let currentRow = [];
-        let newMap = [];
 
         // w = wall, b = box, p = player spawn pos, s = empty space near player spawn, e = empty square
         for (let i = 0; i < totalRows; i++) {
@@ -91,6 +84,7 @@ class Map {
                 ) {
                     currentRow[j] = "w";
                 }
+
                 // marks player spawn squares
                 else if (
                     // player 1 spawn
@@ -120,9 +114,17 @@ class Map {
                     (i === totalRows - 3 && j === 1)
                 ) {
                     currentRow[j] = "s";
-                } else if (floor(random(2))) {
+                }
+                // marks grid of walls across the map
+                else if (i % 2 == 0 && j % 2 == 0) {
+                    currentRow[j] = "w";
+                }
+                // marks random squares for boxes
+                else if (floor(random(2))) {
                     currentRow[j] = "b";
-                } else {
+                }
+                // marks any unmarked squares empty
+                else {
                     currentRow[j] = "e";
                 }
             }
