@@ -3,9 +3,9 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(640, 480);
-    gameMap = new Map(height, width);
-    const generatedMap = gameMap.generate();
+    createCanvas(600, 520);
+    gameMap = new Map(height, width, 40);
+    gameMap.generate();
 }
 
 function draw() {
