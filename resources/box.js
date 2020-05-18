@@ -7,7 +7,7 @@ class Box {
         this.background = color(132, 66, 4);
     }
 
-    BoxStyle() {
+    show() {
         fill(this.background);
         stroke(0);
         strokeWeight(1);

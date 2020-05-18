@@ -1,133 +1,64 @@
 class Map {
-    constructor(
-        sizeHeight,
-        sizeWidth,
-        walls,
-        boxes,
-        laneSize = 40,
-        edgeColor = 50
-    ) {
+    constructor(sizeHeight, sizeWidth, laneSize = 40, edgeColor = 50) {
         this.sizeHeight = sizeHeight;
         this.sizeWidth = sizeWidth;
         this.laneSize = laneSize;
-        this.walls = walls;
-        this.boxes = boxes;
         this.edgeColor = edgeColor;
         this.constraints = [];
         this.currentMap = [];
+        this.spawns = [];
     }
 
-    draw() {
+    show() {
         // background color
         fill(110, 255, 60);
         // full background
         rect(0, 0, this.sizeWidth, this.sizeHeight);
 
-        // edge color
-        fill(this.edgeColor);
-        stroke(this.edgeColor);
-
-        // top edge
-        rect(0, 0, this.sizeWidth, this.laneSize);
-
-        // bottom edge
-        rect(0, this.sizeHeight - this.laneSize, this.sizeWidth, this.laneSize);
-
-        // rigt edge
-        rect(
-            this.sizeWidth - this.laneSize,
-            0 + this.laneSize,
-            this.laneSize,
-            this.sizeHeight - this.laneSize * 2
-        );
-
-        //left edge
-        rect(
-            0,
-            0 + this.laneSize,
-            this.laneSize,
-            this.sizeHeight - this.laneSize * 2
-        );
-
-        // draws out boxes from generated map
-        // TODO add walls
-        // for (let i = 0; i < this.currentMap.length; i++) {
-        //     for (let j = 0; j < this.currentMap[i].length; j++) {
-        //         switch (this.currentMap[i][j]) {
-        //             case "b":
-        //                 new Box(
-        //                     this.laneSize,
-        //                     j * this.laneSize,
-        //                     i * this.laneSize
-        //                 ).BoxStyle();
-        //                 break;
-        //             case "w":
-        //                 new Wall(
-        //                     this.laneSize,
-        //                     j * this.laneSize,
-        //                     i * this.laneSize
-        //                 ).draw();
-        //                 break;
-        //             default:
-        //                 break;
-        //         }
-        //     }
-        // }
+        // draws everything from the map
+        for (let i = 0; i < this.currentMap.length; i++) {
+            for (let j = 0; j < this.currentMap[i].length; j++) {
+                if (typeof this.currentMap[i][j].show === "function") {
+                    this.currentMap[i][j].show();
+                }
+            }
+        }
     }
 
     generate() {
-        // test generation map using cordinates
-        // let rowHeight = floor(this.sizeHeight / this.laneSize);
-        // let rowWidth = floor(this.sizeWidth / this.laneSize);
-        // for (let i = 2; i < rowHeight - 1; i += 2) {
-        //     for (let j = 2; j < rowWidth - 1; j += 2) {
-        //         new Box().BoxStyle(j * this.laneSize, i * this.laneSize);
-        //     }
-        // }
-        // test generation of map template array, can maybe be used for constraints
-        // let rowHeight = floor(this.sizeHeight / this.laneSize);
-        // let rowWidth = floor(this.sizeWidth / this.laneSize);
-        // let currentRow;
-        // // var newMap;
-        // for (let i = 0; i < rowHeight; i++) {
-        //     for (let j = 0; j < rowWidth; j++) {
-        //         if (i === 0 || i === rowHeight || j === 0 || j === rowWidth) {
-        //             currentRow[i][j] = "x";
-        //             // this.newMap[i][j] = "x";
-        //         } else {
-        //             currentRow[i][j] = ["b"];
-        //             // this.newMap[i][j] = "b";
-        //         }
-        //         console.log(this.newMap[i][j]);
-        //     }
-        //     this.constraints[i] = currentRow;
-        //     currentRow = [];
-        // }
-        // return this.newMap;
-        // return this.constraints;
-        // test generation full map of boxes
-        // for (
-        //     let i = this.laneSize;
-        //     i < this.sizeHeight - this.laneSize;
-        //     i += this.laneSize
-        // ) {
-        //     for (
-        //         let j = this.laneSize;
-        //         j < this.sizeWidth - this.laneSize;
-        //         j += this.laneSize
-        //     ) {
-        //         new Box().BoxStyle(j, i);
-        //     }
-        // }
-
         // gets a new map and changes some squares of the play field to be walls and empty space
         let createdMap = this.createMap();
-        createdMap[1][1] = "p";
-        createdMap[1][2] = "s";
-        createdMap[2][1] = "s";
-        createdMap[2][2] = "w";
-        createdMap[2][4] = "w";
-        // createdMap[1][1] = "w";
+
+        // genarates objects from map blueprint
+        for (let i = 0; i < this.currentMap.length; i++) {
+            for (let j = 0; j < this.currentMap[i].length; j++) {
+                switch (this.currentMap[i][j]) {
+                    case "b":
+                        this.constraints[i][j] = new Box(
+                            this.laneSize,
+                            j * this.laneSize,
+                            i * this.laneSize
+                        );
+                        break;
+                    case "w":
+                        this.constraints[i][j] = new Wall(
+                            this.laneSize,
+                            j * this.laneSize,
+                            i * this.laneSize
+                        );
+                        break;
+                    case "p":
+                        this.spawns.push([
+                            i * this.laneSize,
+                            j * this.laneSize,
+                        ]);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
         return createdMap;
     }
 
@@ -136,25 +67,70 @@ class Map {
         let totalRows = floor(this.sizeHeight / this.laneSize);
         let lengthOfRows = floor(this.sizeWidth / this.laneSize);
         let currentRow = [];
-        let newMap = [];
+
+        // w = wall, b = box, p = player spawn pos, s = empty space near player spawn, e = empty square
         for (let i = 0; i < totalRows; i++) {
             for (let j = 0; j < lengthOfRows; j++) {
+                // fills edges with walls
                 if (
+                    // top edge
                     i === 0 ||
+                    // bottom edge
                     i === totalRows - 1 ||
+                    // left edge
                     j === 0 ||
+                    // right edge
                     j === lengthOfRows - 1
                 ) {
-                    currentRow[j] = "x";
-                } else {
+                    currentRow[j] = "w";
+                }
+
+                // marks player spawn squares
+                else if (
+                    // player 1 spawn
+                    (i === 1 && j === 1) ||
+                    // player 2 spawn
+                    (i === totalRows - 2 && j === lengthOfRows - 2) ||
+                    // player 3 spawn
+                    (i === 1 && j === lengthOfRows - 2) ||
+                    // player 4 spawn
+                    (i === totalRows - 2 && j === 1)
+                ) {
+                    currentRow[j] = "p";
+                }
+                // marks player spawn areas so they stay empty
+                else if (
+                    // player 1 spawn area
+                    (i === 1 && j === 2) ||
+                    (i === 2 && j === 1) ||
+                    // player 2 spawn area
+                    (i === totalRows - 2 && j === lengthOfRows - 3) ||
+                    (i === totalRows - 3 && j === lengthOfRows - 2) ||
+                    // player 3 spawn area
+                    (i === 1 && j === lengthOfRows - 3) ||
+                    (i === 2 && j === lengthOfRows - 2) ||
+                    // player 4 spawn area
+                    (i === totalRows - 2 && j === 2) ||
+                    (i === totalRows - 3 && j === 1)
+                ) {
+                    currentRow[j] = "s";
+                }
+                // marks grid of walls across the map
+                else if (i % 2 == 0 && j % 2 == 0) {
+                    currentRow[j] = "w";
+                }
+                // marks random squares for boxes
+                else if (floor(random(2))) {
                     currentRow[j] = "b";
+                }
+                // marks any unmarked squares empty
+                else {
+                    currentRow[j] = "e";
                 }
             }
             this.constraints.push(currentRow);
             this.currentMap.push(currentRow);
-            newMap.push(currentRow);
             currentRow = [];
         }
-        return newMap;
     }
 }
