@@ -6,12 +6,25 @@ function setup() {
     createCanvas(600, 520);
     gameMap = new Map(height, width, 40);
     gameMap.generate();
-    // players = [new Player(60, 60, 32, 155), new Player(220, 220, 32, 75)];
-    players = [new Player(60, 60, 32, 155)];
+    // players = [
+    //     new Player(gameMap.spawns[0][0], gameMap.spawns[0][1], 32, 155),
+    //     new Player(gameMap.spawns[3][0], gameMap.spawns[3][1], 32, 75),
+    // ];
+    players = [new Player(gameMap.spawns[0][0], gameMap.spawns[0][1], 32, 155)];
+    bombs = [];
+}
+
+function keyPressed() {
+    if (keyCode == CONTROL) {
+        bombs.push(new Bomb(players[0].x, players[0].y, 30, 50));
+    }
 }
 
 function draw() {
     gameMap.show();
+    for (let i = 0; i < bombs.length; i++) {
+        bombs[i].show();
+    }
     for (let i = 0; i < players.length; i++) {
         players[i].savePos();
         players[i].walk();
