@@ -16,6 +16,11 @@ function setup() {
        gameMap.generate();
   
     //console.log(gameMap.constraints);
+    createCanvas(600, 520);
+    gameMap = new Map(height, width, 40);
+    gameMap.generate();
+    // players = [new Player(60, 60, 32, 155), new Player(220, 220, 32, 75)];
+    players = [new Player(60, 60, 32, 155)];
 }
 function draw() {
 if(interface.GameShow){
@@ -24,14 +29,15 @@ if(interface.GameShow){
         players[i].savePos();
         players[i].walk();
         for (let j = 0; j < gameMap.constraints.length; j++) {
-            if (players[i].checkCollision(gameMap.constraints[j])) {
-                players[i].x = players[i].prevX;
-                players[i].y = players[i].prevY;
+            for (let k = 0; k < gameMap.constraints[j].length; k++) {
+                if (players[i].checkCollision(gameMap.constraints[j][k])) {
+                    players[i].x = players[i].prevX;
+                    players[i].y = players[i].prevY;
+                }
             }
-            gameMap.constraints[j];
         }
-        for (let k = 0; k < players.length; k++) {
-            if (k != i && players[i].checkCollision(players[k])) {
+        for (let l = 0; l < players.length; l++) {
+            if (l != i && players[i].checkCollision(players[l])) {
                 players[i].x = players[i].prevX;
                 players[i].y = players[i].prevY;
             }
