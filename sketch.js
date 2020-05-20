@@ -1,16 +1,24 @@
+let interface;
+let GameStart;
+
 function preload() {
     // if there is assets like images that need to loadead before setup or draw
+    interface = new Interface()
+    GameStart = interface.GameStart
+    
 }
 
 function setup() {
-    createCanvas(600, 520);
-    players = [new Player(60, 60, 32, 155), new Player(220, 220, 32, 75)];
-    gameMap = new Map(height, width, 40);
-    gameMap.generate();
-    console.log(gameMap.constraints);
+      interface.StartEvent()
+       createCanvas(600, 520);
+       players = [new Player(60, 60, 32, 155), new Player(220, 220, 32, 75)];
+       gameMap = new Map(height, width, 40);
+       gameMap.generate();
+  
+    //console.log(gameMap.constraints);
 }
-
 function draw() {
+if(interface.GameShow){
     gameMap.show();
     for (let i = 0; i < players.length; i++) {
         players[i].savePos();
@@ -30,4 +38,7 @@ function draw() {
         }
         players[i].show();
     }
+}
+
+    
 }
