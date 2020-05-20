@@ -50,10 +50,8 @@ class Player {
                 this.yTipPosistion = -this.yTip;
             }
         }
-        //removing the background issue
-        // clear()
-        // background(153)
     }
+
     //seperation from playershow to easily rotate is sepertly from static parts
     hatTipShape() {
         push();
@@ -85,13 +83,6 @@ class Player {
         fill(0);
         circle(xPosition, yPosition, this.size / 6);
     }
-    //for getting players cordinat
-    posistionX() {
-        return this.x;
-    }
-    posistionY() {
-        return this.y;
-    }
 
     savePos() {
         this.prevX = this.x;
@@ -99,12 +90,6 @@ class Player {
     }
 
     checkCollision(other) {
-        // console.log(
-        //     this.x + this.size >= other.x,
-        //     this.x <= other.x + other.size,
-        //     this.y + this.h >= other.y,
-        //     this.y <= other.y + other.size
-        // );
         if (
             // checks if right edge hits others left edge
             this.x + this.size / 2 >= other.x &&
