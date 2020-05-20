@@ -1,5 +1,9 @@
 class Player {
-    constructor(_x, _y, size, color) {
+    constructor(_x, _y, size, color, keymap) {
+        const keyCodes = [
+            [37, 39, 38, 40],
+            [65, 68, 87, 83],
+        ];
         this.x = _x;
         this.y = _y;
         this.prevX = _x;
@@ -14,10 +18,14 @@ class Player {
         this.bombs = [];
         this.maxBombCount = 1;
         this.currentBombCount = 0;
+        this.left = keyCodes[keymap][0];
+        this.right = keyCodes[keymap][1];
+        this.up = keyCodes[keymap][2];
+        this.down = keyCodes[keymap][3];
     }
 
     walk() {
-        if (keyIsDown(LEFT_ARROW)) {
+        if (keyIsDown(this.left)) {
             if (this.x > 0 + this.size / 2) {
                 this.x = this.x - 2;
                 //for when the hattip rotates
@@ -27,7 +35,7 @@ class Player {
             }
         }
 
-        if (keyIsDown(RIGHT_ARROW)) {
+        if (keyIsDown(this.right)) {
             if (this.x < width - this.size / 2) {
                 this.x = this.x + 2;
                 this.degres = 0;
@@ -36,7 +44,7 @@ class Player {
             }
         }
 
-        if (keyIsDown(UP_ARROW)) {
+        if (keyIsDown(this.up)) {
             if (this.y > 0 + this.size / 2) {
                 this.y = this.y - 2;
                 this.degres = 270;
@@ -45,7 +53,7 @@ class Player {
             }
         }
 
-        if (keyIsDown(DOWN_ARROW)) {
+        if (keyIsDown(this.down)) {
             if (this.y < height - this.size / 2) {
                 this.y = this.y + 2;
                 this.degres = 90;

@@ -11,12 +11,17 @@ function setup() {
     //     new Player(gameMap.spawns[0][0], gameMap.spawns[0][1], 32, 155),
     //     new Player(gameMap.spawns[3][0], gameMap.spawns[3][1], 32, 75),
     // ];
-    players = [new Player(gameMap.spawns[0][0], gameMap.spawns[0][1], 50, 155)];
+    players = [
+        new Player(gameMap.spawns[0][0], gameMap.spawns[0][1], 50, 155, 1),
+    ];
 }
 
 function keyPressed() {
-    if (keyCode == CONTROL) {
+    if (keyCode === CONTROL) {
         players[0].placeBomb();
+    }
+    if (keyCode === 32) {
+        players[1].placeBomb();
     }
 }
 
