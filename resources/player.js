@@ -11,6 +11,9 @@ class Player {
         this.yTip = _y;
         this.xTipPosistion = -_x;
         this.yTipPosistion = -_y;
+        this.bombs = [];
+        this.maxBombCount = 1;
+        this.currentBombCount = 0;
     }
 
     walk() {
@@ -82,6 +85,10 @@ class Player {
         circle(xPosition, yPosition, this.size + 2);
         fill(0);
         circle(xPosition, yPosition, this.size / 6);
+        this.removeBomb();
+        for (let i = 0; i < this.bombs.length; i++) {
+            this.bombs[i].show();
+        }
     }
 
     savePos() {
@@ -103,5 +110,23 @@ class Player {
             return true;
         }
         return false;
+    }
+
+    placeBomb() {
+        if (this.currentBombCount < this.maxBombCount) {
+            this.bombs.push(
+                new Bomb(this.x, this.y, this.size, this.size * 1.75)
+            );
+            this.currentBombCount++;
+        }
+    }
+
+    removeBomb() {
+        for (let i = 0; i < this.bombs.length; i++) {
+            if (this.bombs[i].bombgone) {
+                this.bombs.pop(this.bombs[i]);
+                this.currentBombCount--;
+            }
+        }
     }
 }

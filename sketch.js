@@ -3,28 +3,25 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(600, 520);
-    gameMap = new Map(height, width, 40);
+    createCanvas(900, 780);
+    gameMap = new Map(height, width, 60);
+
     gameMap.generate();
     // players = [
     //     new Player(gameMap.spawns[0][0], gameMap.spawns[0][1], 32, 155),
     //     new Player(gameMap.spawns[3][0], gameMap.spawns[3][1], 32, 75),
     // ];
-    players = [new Player(gameMap.spawns[0][0], gameMap.spawns[0][1], 32, 155)];
-    bombs = [];
+    players = [new Player(gameMap.spawns[0][0], gameMap.spawns[0][1], 50, 155)];
 }
 
 function keyPressed() {
     if (keyCode == CONTROL) {
-        bombs.push(new Bomb(players[0].x, players[0].y, 30, 50));
+        players[0].placeBomb();
     }
 }
 
 function draw() {
     gameMap.show();
-    for (let i = 0; i < bombs.length; i++) {
-        bombs[i].show();
-    }
     for (let i = 0; i < players.length; i++) {
         players[i].savePos();
         players[i].walk();

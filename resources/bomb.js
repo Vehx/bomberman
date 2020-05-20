@@ -1,13 +1,13 @@
 class Bomb {
-    constructor(_x, _y, _size, _explostionSize, _fuseTime) {
+    constructor(_x, _y, _size, _explostionSize) {
         // use players _x,_y to set the bomb
         this.x = _x;
         this.y = _y;
         //size of the bomb and fuseLength
         this.size = _size;
         this.FuseLength = this.size - this.size / 4.2;
-        this.fuseTime = _fuseTime;
         this.timer = 0;
+        this.bombgone = false;
         //change _explotionsSize to something else for sugesting can be an array ?
         this.explostionSizeY1 = _explostionSize;
         this.explostionSizeY2 = _explostionSize;
@@ -121,7 +121,7 @@ class Bomb {
         this.explosionShowX(this.explostionSizeX2, -1);
     }
 
-    //the bigger the bomb is the longer it takes for it to explode (fuseTime)
+    //the bigger the bomb is the longer it takes for it to explod)
     show() {
         push();
         this.timer += 0.09;
@@ -136,10 +136,9 @@ class Bomb {
         }
         if (this.timer > this.FuseLength / 2) {
             this.explosionShow(this.explostionSize);
-        }
-        // TODO set time thing for when bomb should disappear
-        if (this.time + 290) {
-            this.bombgone = true;
+            if (this.timer > this.FuseLength / 1.5) {
+                this.bombgone = true;
+            }
         }
         pop();
     }
