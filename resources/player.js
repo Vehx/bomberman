@@ -1,26 +1,23 @@
 class Player {
     constructor(_x, _y, size, color, keymap) {
+        //playerStyle, position 
+        this.hatColor = color;
+        this.size = size;
+        this.x = _x;
+        this.y = _y;
+        this.degres = 0;
+        //for colition
+        this.prevX = _x;
+        this.prevY = _y;
+        //bomb
+        this.bombs = [];
+        this.maxBombCount = 1;
+        this.currentBombCount = 0;
+        //controlls
         const keyCodes = [
             [37, 39, 38, 40],
             [65, 68, 87, 83],
         ];
-        this.hatColor = color;
-        this.x = _x;
-        this.y = _y;
-        this.prevX = _x;
-        this.prevY = _y;
-        this.size = size;
-
-        this.degres = 0;
-        this.xTip = _x;
-        this.yTip = _y;
-        this.xTipPosistion = -_x;
-        this.yTipPosistion = -_y;
-        // console.log(this.xTip, this.yTip);
-
-        this.bombs = [];
-        this.maxBombCount = 1;
-        this.currentBombCount = 0;
         this.left = keyCodes[keymap][0];
         this.right = keyCodes[keymap][1];
         this.up = keyCodes[keymap][2];
@@ -33,8 +30,7 @@ class Player {
                 this.x = this.x - 2;
                 //for when the hattip rotates
                 this.degres = 180;
-                this.xTipPosistion = this.xTip;
-                this.yTipPosistion = this.yTip;
+                this.check()
             }
         }
 
@@ -42,8 +38,7 @@ class Player {
             if (this.x < width - this.size / 2) {
                 this.x = this.x + 2;
                 this.degres = 0;
-                this.xTipPosistion = -this.xTip;
-                this.yTipPosistion = -this.yTip;
+                this.check()
             }
         }
 
@@ -51,8 +46,7 @@ class Player {
             if (this.y > 0 + this.size / 2) {
                 this.y = this.y - 2;
                 this.degres = 270;
-                this.xTipPosistion = -this.xTip;
-                this.yTipPosistion = this.yTip;
+                this.check()
             }
         }
 
@@ -60,29 +54,29 @@ class Player {
             if (this.y < height - this.size / 2) {
                 this.y = this.y + 2;
                 this.degres = 90;
-                this.xTipPosistion = this.xTip;
-                this.yTipPosistion = -this.yTip;
-                // console.log(this.x + " " + this.y);
-                // console.log(this.xTipPosistion + " " + this.yTipPosistion);
+                this.check()
+                
             }
         }
     }
-
+    check(){
+        console.log("player x" + this.x + " y" +  this.y)
+        console.log("hatTip x" + (this.x + this.xTipPosistion)+" y" + (this.y + this.yTipPosistion))
+    }
     //seperation from playershow to easily rotate is sepertly from static parts
     hatTipShape() {
         push();
         angleMode(DEGREES);
-        translate(this.x + this.xTipPosistion, this.y + this.yTipPosistion);
-
+        translate(this.x,   this.y );
         rotate(this.degres);
         beginShape();
-        curveVertex(this.xTip, this.yTip - this.size / 2 + this.size / 20);
-        curveVertex(this.xTip + this.size / 1.7, this.yTip - this.size / 2.2);
-        curveVertex(this.xTip + this.size / 1.2, this.yTip - this.size / 2.5);
-        curveVertex(this.xTip + this.size / 1.08, this.yTip);
-        curveVertex(this.xTip + this.size / 1.2, this.yTip + this.size / 2.5);
-        curveVertex(this.xTip + this.size / 1.7, this.yTip + this.size / 2.1);
-        vertex(this.xTip, this.yTip + this.size / 2.4 - this.size / 20);
+        curveVertex(0, 0 - this.size / 2 + this.size / 20);
+        curveVertex(this.size / 1.7, -this.size / 2.2);
+        curveVertex(this.size / 1.2,  - this.size / 2.5);
+        curveVertex( this.size / 1.08, 0);
+        curveVertex(this.size / 1.2, this.size / 2.5);
+        curveVertex( this.size / 1.7, this.size / 2.1);
+        vertex(0, 0 + this.size / 2.4 - this.size / 20);
         endShape(CLOSE);
         pop();
     }
