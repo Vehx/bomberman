@@ -144,4 +144,20 @@ class Player {
             }
         }
     }
+
+    hitByBomb(bomb) {
+        if (
+            // checks if top right corner is larger than bombs cordinate
+            this.x + this.size >= bomb.x &&
+            // checks if top left corner is smaller than bombs cordinate
+            this.x <= bomb.x &&
+            // checks if bottom right corner is larger than bombs cordinate
+            this.y + this.size >= bomb.y &&
+            // checks if bottom left corner is smaller than bombs cordinate
+            this.y <= bomb.y
+        ) {
+            return true;
+        }
+        return false;
+    }
 }

@@ -8,6 +8,8 @@ class Bomb {
         this.FuseLength = this.size - this.size / 4.2;
         this.timer = 0;
         this.bombgone = false;
+        this.exploded = false;
+        this.cords = [];
         //change _explotionsSize to something else for sugesting can be an array ?
         this.explostionSizeY1 = _explostionSize;
         this.explostionSizeY2 = _explostionSize;
@@ -136,15 +138,19 @@ class Bomb {
         }
         if (this.timer > this.FuseLength / 2) {
             this.explosionShow(this.explostionSize);
-            if (this.timer > this.FuseLength / 1.5) {
+            this.exploded = true;
+
+            this.cords = this.explosionArea();
+            if (this.timer > this.FuseLength / 1.1) {
                 this.bombgone = true;
             }
         }
+
         pop();
     }
 
     //to get all the cordinates for the expltion
-    explotionArea() {
+    explosionArea() {
         //the x-axis
         let xleftEnd = this.x + this.explostionSizeX1 * -1;
         let xrightEnd = this.x + this.explostionSizeX2;
@@ -177,7 +183,7 @@ class Bomb {
                 y2 <= xHeightBottom;
                 y2 += iterationNumX
             ) {
-                cordinatesArray.push({ x: x2, y: x2 });
+                cordinatesArray.push({ x: x2, y: y2 });
             }
         }
 
