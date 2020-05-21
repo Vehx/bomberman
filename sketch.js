@@ -3,25 +3,45 @@ let GameStart;
 
 function preload() {
     // if there is assets like images that need to loadead before setup or draw
-    interface = new Interface()
-    GameStart = interface.GameStart
+    interface = new Interface();
+    GameStart = interface.GameStart;
     
 }
 
 function setup() {
-      interface.StartEvent()
-       createCanvas(600, 520);
-       players = [new Player(60, 60, 32, 155), new Player(220, 220, 32, 75)];
-       gameMap = new Map(height, width, 40);
-       gameMap.generate();
-  
-    //console.log(gameMap.constraints);
-    createCanvas(600, 520);
-    gameMap = new Map(height, width, 40);
+    interface.StartEvent();
+    createCanvas(900, 780);
+    const squareScale = 60;
+    gameMap = new Map(height, width, squareScale);
+
     gameMap.generate();
-    // players = [new Player(60, 60, 32, 155), new Player(220, 220, 32, 75)];
-    players = [new Player(60, 60, 32, 155)];
+    players = [
+        new Player(
+            gameMap.spawns[0][0],
+            gameMap.spawns[0][1],
+            squareScale - 10,
+            "red",
+            0
+        ),
+        new Player(
+            gameMap.spawns[3][0],
+            gameMap.spawns[3][1],
+            squareScale - 10,
+            "blue",
+            1
+        ),
+    ];
 }
+
+function keyPressed() {
+    if (keyCode === 190) {
+        players[0].placeBomb();
+    }
+    if (keyCode === 32) {
+        players[1].placeBomb();
+    }
+}
+
 function draw() {
 if(interface.GameShow){
     gameMap.show();

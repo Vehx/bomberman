@@ -49,8 +49,8 @@ class Map {
                         break;
                     case "p":
                         this.spawns.push([
-                            i * this.laneSize,
-                            j * this.laneSize,
+                            j * this.laneSize + this.laneSize / 2,
+                            i * this.laneSize + this.laneSize / 2,
                         ]);
                         break;
 

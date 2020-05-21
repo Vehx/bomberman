@@ -1,20 +1,34 @@
 class Player {
-    constructor(_x, _y, size, color) {
+    constructor(_x, _y, size, color, keymap) {
+        const keyCodes = [
+            [37, 39, 38, 40],
+            [65, 68, 87, 83],
+        ];
+        this.hatColor = color;
         this.x = _x;
         this.y = _y;
         this.prevX = _x;
         this.prevY = _y;
         this.size = size;
-        this.hatColor = color;
+
         this.degres = 0;
         this.xTip = _x;
         this.yTip = _y;
         this.xTipPosistion = -_x;
         this.yTipPosistion = -_y;
+        // console.log(this.xTip, this.yTip);
+
+        this.bombs = [];
+        this.maxBombCount = 1;
+        this.currentBombCount = 0;
+        this.left = keyCodes[keymap][0];
+        this.right = keyCodes[keymap][1];
+        this.up = keyCodes[keymap][2];
+        this.down = keyCodes[keymap][3];
     }
 
     walk() {
-        if (keyIsDown(LEFT_ARROW)) {
+        if (keyIsDown(this.left)) {
             if (this.x > 0 + this.size / 2) {
                 this.x = this.x - 2;
                 //for when the hattip rotates
@@ -24,7 +38,7 @@ class Player {
             }
         }
 
-        if (keyIsDown(RIGHT_ARROW)) {
+        if (keyIsDown(this.right)) {
             if (this.x < width - this.size / 2) {
                 this.x = this.x + 2;
                 this.degres = 0;
@@ -33,7 +47,7 @@ class Player {
             }
         }
 
-        if (keyIsDown(UP_ARROW)) {
+        if (keyIsDown(this.up)) {
             if (this.y > 0 + this.size / 2) {
                 this.y = this.y - 2;
                 this.degres = 270;
@@ -42,18 +56,18 @@ class Player {
             }
         }
 
-        if (keyIsDown(DOWN_ARROW)) {
+        if (keyIsDown(this.down)) {
             if (this.y < height - this.size / 2) {
                 this.y = this.y + 2;
                 this.degres = 90;
                 this.xTipPosistion = this.xTip;
                 this.yTipPosistion = -this.yTip;
+                // console.log(this.x + " " + this.y);
+                // console.log(this.xTipPosistion + " " + this.yTipPosistion);
             }
         }
-        //removing the background issue
-        // clear()
-        // background(153)
     }
+
     //seperation from playershow to easily rotate is sepertly from static parts
     hatTipShape() {
         push();
@@ -74,6 +88,7 @@ class Player {
     }
 
     show() {
+        push();
         let xPosition = this.x;
         let yPosition = this.y;
         stroke(0);
@@ -84,13 +99,11 @@ class Player {
         circle(xPosition, yPosition, this.size + 2);
         fill(0);
         circle(xPosition, yPosition, this.size / 6);
-    }
-    //for getting players cordinat
-    posistionX() {
-        return this.x;
-    }
-    posistionY() {
-        return this.y;
+        pop();
+        this.removeBomb();
+        for (let i = 0; i < this.bombs.length; i++) {
+            this.bombs[i].show();
+        }
     }
 
     savePos() {
@@ -99,12 +112,6 @@ class Player {
     }
 
     checkCollision(other) {
-        // console.log(
-        //     this.x + this.size >= other.x,
-        //     this.x <= other.x + other.size,
-        //     this.y + this.h >= other.y,
-        //     this.y <= other.y + other.size
-        // );
         if (
             // checks if right edge hits others left edge
             this.x + this.size / 2 >= other.x &&
@@ -118,5 +125,23 @@ class Player {
             return true;
         }
         return false;
+    }
+
+    placeBomb() {
+        if (this.currentBombCount < this.maxBombCount) {
+            this.bombs.push(
+                new Bomb(this.x, this.y, this.size, this.size * 1.75)
+            );
+            this.currentBombCount++;
+        }
+    }
+
+    removeBomb() {
+        for (let i = 0; i < this.bombs.length; i++) {
+            if (this.bombs[i].bombgone) {
+                this.bombs.pop(this.bombs[i]);
+                this.currentBombCount--;
+            }
+        }
     }
 }
