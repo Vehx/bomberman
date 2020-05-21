@@ -30,7 +30,7 @@ class Player {
                 this.x = this.x - 2;
                 //for when the hattip rotates
                 this.degres = 180;
-                this.check()
+             
             }
         }
 
@@ -38,7 +38,7 @@ class Player {
             if (this.x < width - this.size / 2) {
                 this.x = this.x + 2;
                 this.degres = 0;
-                this.check()
+                
             }
         }
 
@@ -46,7 +46,7 @@ class Player {
             if (this.y > 0 + this.size / 2) {
                 this.y = this.y - 2;
                 this.degres = 270;
-                this.check()
+              
             }
         }
 
@@ -54,15 +54,12 @@ class Player {
             if (this.y < height - this.size / 2) {
                 this.y = this.y + 2;
                 this.degres = 90;
-                this.check()
+                
                 
             }
         }
     }
-    check(){
-        console.log("player x" + this.x + " y" +  this.y)
-        console.log("hatTip x" + (this.x + this.xTipPosistion)+" y" + (this.y + this.yTipPosistion))
-    }
+
     //seperation from playershow to easily rotate is sepertly from static parts
     hatTipShape() {
         push();
