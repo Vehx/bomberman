@@ -1,8 +1,15 @@
+let interface;
+let GameStart;
+
 function preload() {
     // if there is assets like images that need to loadead before setup or draw
+    interface = new Interface();
+    GameStart = interface.GameStart;
+    
 }
 
 function setup() {
+    interface.StartEvent();
     createCanvas(900, 780);
     const squareScale = 60;
     gameMap = new Map(height, width, squareScale);
@@ -27,7 +34,7 @@ function setup() {
 }
 
 function keyPressed() {
-    if (keyCode === CONTROL) {
+    if (keyCode === 190) {
         players[0].placeBomb();
     }
     if (keyCode === 32) {
@@ -36,6 +43,7 @@ function keyPressed() {
 }
 
 function draw() {
+if(interface.GameShow){
     gameMap.show();
     for (let i = 0; i < players.length; i++) {
         players[i].savePos();
@@ -56,4 +64,7 @@ function draw() {
         }
         players[i].show();
     }
+}
+
+    
 }
