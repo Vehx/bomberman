@@ -1,6 +1,6 @@
 class Player {
     constructor(_x, _y, size, color, keymap) {
-        //playerStyle, position 
+        //playerStyle, position
         this.hatColor = color;
         this.size = size;
         this.x = _x;
@@ -30,7 +30,6 @@ class Player {
                 this.x = this.x - 2;
                 //for when the hattip rotates
                 this.degres = 180;
-                this.check()
             }
         }
 
@@ -38,7 +37,6 @@ class Player {
             if (this.x < width - this.size / 2) {
                 this.x = this.x + 2;
                 this.degres = 0;
-                this.check()
             }
         }
 
@@ -46,7 +44,6 @@ class Player {
             if (this.y > 0 + this.size / 2) {
                 this.y = this.y - 2;
                 this.degres = 270;
-                this.check()
             }
         }
 
@@ -54,28 +51,23 @@ class Player {
             if (this.y < height - this.size / 2) {
                 this.y = this.y + 2;
                 this.degres = 90;
-                this.check()
-                
             }
         }
     }
-    check(){
-        console.log("player x" + this.x + " y" +  this.y)
-        console.log("hatTip x" + (this.x + this.xTipPosistion)+" y" + (this.y + this.yTipPosistion))
-    }
+
     //seperation from playershow to easily rotate is sepertly from static parts
     hatTipShape() {
         push();
         angleMode(DEGREES);
-        translate(this.x,   this.y );
+        translate(this.x, this.y);
         rotate(this.degres);
         beginShape();
         curveVertex(0, 0 - this.size / 2 + this.size / 20);
         curveVertex(this.size / 1.7, -this.size / 2.2);
-        curveVertex(this.size / 1.2,  - this.size / 2.5);
-        curveVertex( this.size / 1.08, 0);
+        curveVertex(this.size / 1.2, -this.size / 2.5);
+        curveVertex(this.size / 1.08, 0);
         curveVertex(this.size / 1.2, this.size / 2.5);
-        curveVertex( this.size / 1.7, this.size / 2.1);
+        curveVertex(this.size / 1.7, this.size / 2.1);
         vertex(0, 0 + this.size / 2.4 - this.size / 20);
         endShape(CLOSE);
         pop();
@@ -137,5 +129,21 @@ class Player {
                 this.currentBombCount--;
             }
         }
+    }
+
+    hitByBomb(bomb) {
+        if (
+            // checks if top right corner is larger than bombs cordinate
+            this.x + this.size >= bomb.x &&
+            // checks if top left corner is smaller than bombs cordinate
+            this.x <= bomb.x &&
+            // checks if bottom right corner is larger than bombs cordinate
+            this.y + this.size >= bomb.y &&
+            // checks if bottom left corner is smaller than bombs cordinate
+            this.y <= bomb.y
+        ) {
+            return true;
+        }
+        return false;
     }
 }
