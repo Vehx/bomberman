@@ -4,15 +4,25 @@ function preload() {
 
 function setup() {
     createCanvas(900, 780);
-    gameMap = new Map(height, width, 60);
+    const squareScale = 60;
+    gameMap = new Map(height, width, squareScale);
 
     gameMap.generate();
-    // players = [
-    //     new Player(gameMap.spawns[0][0], gameMap.spawns[0][1], 32, 155),
-    //     new Player(gameMap.spawns[3][0], gameMap.spawns[3][1], 32, 75),
-    // ];
     players = [
-        new Player(gameMap.spawns[0][0], gameMap.spawns[0][1], 50, 155, 1),
+        new Player(
+            gameMap.spawns[0][0],
+            gameMap.spawns[0][1],
+            squareScale - 10,
+            "red",
+            0
+        ),
+        new Player(
+            gameMap.spawns[3][0],
+            gameMap.spawns[3][1],
+            squareScale - 10,
+            "blue",
+            1
+        ),
     ];
 }
 

@@ -4,17 +4,20 @@ class Player {
             [37, 39, 38, 40],
             [65, 68, 87, 83],
         ];
+        this.hatColor = color;
         this.x = _x;
         this.y = _y;
         this.prevX = _x;
         this.prevY = _y;
         this.size = size;
-        this.hatColor = color;
+
         this.degres = 0;
         this.xTip = _x;
         this.yTip = _y;
         this.xTipPosistion = -_x;
         this.yTipPosistion = -_y;
+        // console.log(this.xTip, this.yTip);
+
         this.bombs = [];
         this.maxBombCount = 1;
         this.currentBombCount = 0;
@@ -59,6 +62,8 @@ class Player {
                 this.degres = 90;
                 this.xTipPosistion = this.xTip;
                 this.yTipPosistion = -this.yTip;
+                // console.log(this.x + " " + this.y);
+                // console.log(this.xTipPosistion + " " + this.yTipPosistion);
             }
         }
     }
@@ -83,6 +88,7 @@ class Player {
     }
 
     show() {
+        push();
         let xPosition = this.x;
         let yPosition = this.y;
         stroke(0);
@@ -93,6 +99,7 @@ class Player {
         circle(xPosition, yPosition, this.size + 2);
         fill(0);
         circle(xPosition, yPosition, this.size / 6);
+        pop();
         this.removeBomb();
         for (let i = 0; i < this.bombs.length; i++) {
             this.bombs[i].show();
