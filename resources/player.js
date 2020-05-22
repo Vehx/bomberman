@@ -1,6 +1,6 @@
 class Player {
     constructor(_x, _y, size, color, keymap) {
-        //playerStyle, position 
+        //playerStyle, position
         this.hatColor = color;
         this.size = size;
         this.x = _x;
@@ -64,15 +64,15 @@ class Player {
     hatTipShape() {
         push();
         angleMode(DEGREES);
-        translate(this.x,   this.y );
+        translate(this.x, this.y);
         rotate(this.degres);
         beginShape();
         curveVertex(0, 0 - this.size / 2 + this.size / 20);
         curveVertex(this.size / 1.7, -this.size / 2.2);
-        curveVertex(this.size / 1.2,  - this.size / 2.5);
-        curveVertex( this.size / 1.08, 0);
+        curveVertex(this.size / 1.2, -this.size / 2.5);
+        curveVertex(this.size / 1.08, 0);
         curveVertex(this.size / 1.2, this.size / 2.5);
-        curveVertex( this.size / 1.7, this.size / 2.1);
+        curveVertex(this.size / 1.7, this.size / 2.1);
         vertex(0, 0 + this.size / 2.4 - this.size / 20);
         endShape(CLOSE);
         pop();
@@ -134,5 +134,21 @@ class Player {
                 this.currentBombCount--;
             }
         }
+    }
+
+    hitByBomb(bomb) {
+        if (
+            // checks if top edge is larger than bombs cordinate
+            this.x + this.size / 2 >= bomb.x &&
+            // checks if left edge is smaller than bombs cordinate
+            this.x - this.size / 2 <= bomb.x &&
+            // checks if bottom edge is larger than bombs cordinate
+            this.y + this.size / 2 >= bomb.y &&
+            // checks if right edge is smaller than bombs cordinate
+            this.y - this.size / 2 <= bomb.y
+        ) {
+            return true;
+        }
+        return false;
     }
 }

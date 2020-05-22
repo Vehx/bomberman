@@ -133,4 +133,9 @@ class Map {
             currentRow = [];
         }
     }
+
+    emptySquare(x, y) {
+        this.constraints[y / this.laneSize][x / this.laneSize] = "e";
+        this.currentMap[y / this.laneSize][x / this.laneSize] = "e";
+    }
 }
