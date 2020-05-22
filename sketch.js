@@ -33,9 +33,11 @@ function setup() {
 }
 
 function keyPressed() {
+    // period
     if (keyCode === 190) {
         players[0].placeBomb();
     }
+    //spacebar
     if (keyCode === 32) {
         players[1].placeBomb();
     }

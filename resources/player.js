@@ -30,6 +30,7 @@ class Player {
                 this.x = this.x - 2;
                 //for when the hattip rotates
                 this.degres = 180;
+             
             }
         }
 
@@ -37,6 +38,7 @@ class Player {
             if (this.x < width - this.size / 2) {
                 this.x = this.x + 2;
                 this.degres = 0;
+                
             }
         }
 
@@ -44,6 +46,7 @@ class Player {
             if (this.y > 0 + this.size / 2) {
                 this.y = this.y - 2;
                 this.degres = 270;
+              
             }
         }
 
@@ -51,6 +54,8 @@ class Player {
             if (this.y < height - this.size / 2) {
                 this.y = this.y + 2;
                 this.degres = 90;
+                
+                
             }
         }
     }
