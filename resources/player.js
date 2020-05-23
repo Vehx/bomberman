@@ -1,5 +1,6 @@
 class Player {
     constructor(_x, _y, size, color, keymap) {
+        this.name;
         //playerStyle, position
         this.hatColor = color;
         this.size = size;
