@@ -60,7 +60,7 @@ function draw() {
             }
             // check for collision with other players
             for (let l = 0; l < players.length; l++) {
-                if (l != i && players[i].checkCollision(players[l])) {
+                if (l != i && players[i].checkPlayerCollision(players[l])) {
                     players[i].x = players[i].prevX;
                     players[i].y = players[i].prevY;
                 }
