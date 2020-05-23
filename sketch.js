@@ -1,49 +1,53 @@
 let interface;
 let GameStart;
+let playerLost;
 
-function preload() {
-    // if there is assets like images that need to loadead before setup or draw
-    interface = new Interface();
-    GameStart = interface.GameStart;
-}
-
-function setup() {
-    interface.StartEvent();
-    createCanvas(900, 780);
-    const squareScale = 60;
-    gameMap = new Map(height, width, squareScale);
-
-    gameMap.generate();
-    players = [
-        new Player(
-            gameMap.spawns[0][0],
-            gameMap.spawns[0][1],
-            squareScale - 10,
-            "red",
-            0
-        ),
-        new Player(
-            gameMap.spawns[3][0],
-            gameMap.spawns[3][1],
-            squareScale - 10,
-            "blue",
-            1
-        ),
-    ];
-}
-
-function keyPressed() {
-    // period
-    if (keyCode === 190) {
-        players[0].placeBomb();
+    function preload() {
+        // if there is assets like images that need to loadead before setup or draw
+        
+         interface = new Interface();
+     
     }
-    //spacebar
-    if (keyCode === 32) {
-        players[1].placeBomb();
+
+    function setup() {
+
+        createCanvas(900, 780);
+        const squareScale = 60;
+        gameMap = new Map(height, width, squareScale);
+
+        gameMap.generate();
+        players = [
+            new Player(
+                gameMap.spawns[0][0],
+                gameMap.spawns[0][1],
+                squareScale - 10,
+                "red",
+                0,
+            ),
+            new Player(
+                gameMap.spawns[3][0],
+                gameMap.spawns[3][1],
+                squareScale - 10,
+                "blue",
+                1,
+
+            ),
+        ];
     }
-}
+
+    function keyPressed() {
+        // period
+        if (keyCode === 190) {
+            players[0].placeBomb();
+        }
+        //spacebar
+        if (keyCode === 32) {
+            players[1].placeBomb();
+        }
+    }
 
 function draw() {
+    interface.StartEvent(players)
     if (interface.GameShow) {
         gameMap.show();
         for (let i = 0; i < players.length; i++) {
@@ -71,7 +75,9 @@ function draw() {
                         for (let m = 0; m < cords.length; m++) {
                             for (let n = 0; n < players.length; n++) {
                                 if (players[n].hitByBomb(cords[m])) {
-                                    console.log("Im ded", players[n].hatColor);
+                                   // console.log("Im ded", players[n].hatColor);
+                                    interface.GameEnd = true;
+                                    playerLost = players[n].name
                                 }
                             }
                             for (let o = 0; o < gameMap.constraints.length; o++) {
@@ -88,4 +94,8 @@ function draw() {
             players[i].show();
         }
     }
+    if (interface.GameEnd) {
+        interface.EndEvent(playerLost, players, gameMap);
+    }
 }
+

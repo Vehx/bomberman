@@ -24,11 +24,17 @@ h1{
     margin: 15px;
     font-size: 42px;
 }
-.errorStart{
-    color:#f93636;
+.message{
     margin:8px 0px;
     height: 16px;
     font-size: 16px;
+}
+.errorMessage{
+ color:#f93636;
+}
+.wonMessage{
+    color:#6EFF3C;
+    font-size: 25px;
 }
 .players{
     width: 100%;
@@ -52,7 +58,7 @@ h1{
 }
 
 
-.startBtn{
+.eventBtn{
     font-family: 'Press Start 2P', cursive;
     background:#6EFF3C;
     border: none;
@@ -64,10 +70,10 @@ h1{
     bottom: 70px;
     
 }
-.startBtn:hover{
+.eventBtn:hover{
     transform: scale(1.1);
 }
-.startBtn:active{
+.eventBtn:active{
   transform: scale(0.9);
   background:rgb(138, 255, 98);
   
