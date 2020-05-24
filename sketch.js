@@ -54,6 +54,7 @@ function draw() {
     
 
    interface.StartEvent(players)
+  
     if (interface.GameShow) {
         gameMap.show();
         for (let i = 0; i < players.length; i++) {
@@ -81,10 +82,11 @@ function draw() {
                         for (let m = 0; m < cords.length; m++) {
                             for (let n = 0; n < players.length; n++) {
                                 if (players[n].hitByBomb(cords[m])) {
-                                   // console.log("Im ded", players[n].hatColor);
+                                    // game ends futherdown calls on endfunction
                                     interface.GameEnd = true;
                                     playerLost = players[n].name
-                                    console.log(playerLost)
+                                 
+                                
                                 }
                             }
                             for (let o = 0; o < gameMap.constraints.length; o++) {
@@ -102,6 +104,7 @@ function draw() {
         }
     }
     if (interface.GameEnd) {
+        //end function
         interface.EndEvent(playerLost, players, gameMap);
     }
 }

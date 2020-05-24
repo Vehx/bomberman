@@ -13,26 +13,31 @@
  
 
     StartEvent(playersArray) {
+        
         if(this.GameShow === false){
-          
-
+            this.GameStart = noLoop()
             new popUpStyle(true, 1, ["START"]);
             const popUpContainer = document.querySelector('.popUpContainer')
             const eventButton = document.querySelector(".eventBtn");
             const message = document.querySelector('.message')
-                  message.innerHTML = "Write your names and hit START to Start Bombing "
+            //Todo add insturktions 
+                  message.innerHTML = "Write your names and hit START to Start Bombing<br> player 1 controls: arrowkeys and period<br> player 2 controls: WASD and spacebar"
+       
+            
         if (playersArray[0].name == undefined){
-
            eventButton.addEventListener("click", () => {
-            if (this.playerNames !== undefined) {
                 this.StartBtnEvent(eventButton, popUpContainer)
-                playersArray[0].name = this.playerNames[0]
-                playersArray[1].name = this.playerNames[1]
+                if(this.playerNames.length > 1){
+           
+                    playersArray[0].name = this.playerNames[0]
+                    playersArray[1].name = this.playerNames[1]
+                }
                
-            }
+                
+      
             });
         }
-            this.GameStart = noLoop()
+           
         }   
     }
     
@@ -42,10 +47,11 @@
     StartBtnEvent(eventButton,popUpContainer){
             const errorMsg = document.querySelector('.message')
                   errorMsg.classList.add('errorMessage')
-                  
-            const player1 = select(".ìnputPlayer1").value()
-            const player2 = select(".ìnputPlayer2").value()
 
+        const player1 = document.querySelector(".ìnputPlayer1").value
+        const player2 = document.querySelector(".ìnputPlayer2").value
+            
+       
             if(player1.length < 1 || player2.length< 1){
                 eventButton.classList.add('error')
                  errorMsg.innerHTML = "You forgot to write your names"
@@ -54,19 +60,28 @@
                 // Todo uppdate: add animation for it to fade away or go away etc
                  //Todo uppdate:  add timer that counts down to from 3 to 0
                 eventButton.classList.remove('error')
-                popUpContainer.remove()
-                this.playerNames=[player1,player2]
-                //starts the game
-                this.GameShow =true;
-                this.GameStart = loop();
+                if (player1 === player2) {
+                    this.playerNames = [player1+"1", player2+"2"]
+                    popUpContainer.remove()
+                  
+                    this.GameShow = true;
+                    this.GameStart = loop();
+                }else{
+                    this.playerNames = [player1, player2]
+                    popUpContainer.remove()
+                    this.GameShow = true;
+                    this.GameStart = loop();
+                }
+                
+               
         }
         
            
         
     }
     EndEvent(playerLost,players,gameMap) {
+     
         const playerWon = this.playerNames.filter(name => name !== playerLost) 
-      
         this.GameStart = noLoop()
         
         if (this.GameEnd && this.printEndonce) {
@@ -91,17 +106,18 @@
                       resetPlayers(players,gameMap)
                       endContainer.remove();
                       this.GameEnd = false;
-                      this.GameStart = loop()
                       this.printEndonce = true;
+                      this.GameStart = loop()
                     });
 
                     newGame.addEventListener('click',()=>{
+                      
                         endContainer.remove();
-                        resetPlayers(players, gameMap)
-                       
+                        this.playerNames = [];
+                        resetPlayers(players, gameMap,true)
+            
                         this.GameEnd = false;
                         this.printEndonce = true;
-                        this.playerNames = [];
                         this.GameShow = false;
                         this.GameStart = loop()
                     })
