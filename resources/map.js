@@ -26,6 +26,10 @@ class Map {
     }
 
     generate() {
+        // resets map
+        this.constraints = [];
+        this.currentMap = [];
+
         // gets a new map and changes some squares of the play field to be walls and empty space
         let createdMap = this.createMap();
 
