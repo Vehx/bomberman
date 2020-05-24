@@ -1,16 +1,17 @@
+
 let interface;
 let GameStart;
 let playerLost;
-
+ 
     function preload() {
         // if there is assets like images that need to loadead before setup or draw
         
-         interface = new Interface();
+        interface = new Interface();
      
     }
 
     function setup() {
-
+        
         createCanvas(900, 780);
         const squareScale = 60;
         gameMap = new Map(height, width, squareScale);
@@ -33,6 +34,7 @@ let playerLost;
 
             ),
         ];
+     
     }
 
     function keyPressed() {
@@ -43,11 +45,15 @@ let playerLost;
         //spacebar
         if (keyCode === 32) {
             players[1].placeBomb();
+            
         }
     }
 
 function draw() {
-    interface.StartEvent(players)
+  
+    
+
+   interface.StartEvent(players)
     if (interface.GameShow) {
         gameMap.show();
         for (let i = 0; i < players.length; i++) {
@@ -78,6 +84,7 @@ function draw() {
                                    // console.log("Im ded", players[n].hatColor);
                                     interface.GameEnd = true;
                                     playerLost = players[n].name
+                                    console.log(playerLost)
                                 }
                             }
                             for (let o = 0; o < gameMap.constraints.length; o++) {

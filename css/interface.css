@@ -1,4 +1,4 @@
-.startContainer{
+.popUpContainer{
     font-family: 'Press Start 2P', cursive;
     background:black;
     color:white;
@@ -8,7 +8,7 @@
    max-width:700px;
    width: 70vw;
     min-height:300px;
-    height:27vh;
+    height:35vh;
     padding:8px;
     top: 50%;
     left: 50%;
@@ -18,16 +18,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
     box-shadow:0px 7px 10px 3px rgba(0,0,0,0.7);
 }
 h1{
-    margin: 15px;
+    margin: 8px;
     font-size: 42px;
 }
 .message{
-    margin:8px 0px;
+    margin:3px 0px 16px 0px;
     height: 16px;
     font-size: 16px;
+    color:white;
+     line-height: 1.6;
 }
 .errorMessage{
  color:#f93636;
@@ -57,7 +60,14 @@ h1{
  border:0px;
 }
 
+.btnContainer{
+    width: 100%;
+    position: relative;
 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
 .eventBtn{
     font-family: 'Press Start 2P', cursive;
     background:#6EFF3C;
@@ -65,9 +75,9 @@ h1{
     font-size: 27px;
     font-weight: bold;
     padding:20px 16px 16px 16px;
+    
     border-radius: 4px;
-    position: absolute;
-    bottom: 70px;
+    
     
 }
 .eventBtn:hover{
@@ -80,7 +90,4 @@ h1{
 }
 .error:active{
     background-color: red;
-}
-.remove{
-    display: none;
 }

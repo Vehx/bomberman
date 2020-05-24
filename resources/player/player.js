@@ -56,37 +56,9 @@ class Player {
         }
     }
 
-    //seperation from playershow to easily rotate is sepertly from static parts
-    hatTipShape() {
-        push();
-        angleMode(DEGREES);
-        translate(this.x, this.y);
-        rotate(this.degres);
-        beginShape();
-        curveVertex(0, 0 - this.size / 2 + this.size / 20);
-        curveVertex(this.size / 1.7, -this.size / 2.2);
-        curveVertex(this.size / 1.2, -this.size / 2.5);
-        curveVertex(this.size / 1.08, 0);
-        curveVertex(this.size / 1.2, this.size / 2.5);
-        curveVertex(this.size / 1.7, this.size / 2.1);
-        vertex(0, 0 + this.size / 2.4 - this.size / 20);
-        endShape(CLOSE);
-        pop();
-    }
-
     show() {
-        push();
-        let xPosition = this.x;
-        let yPosition = this.y;
-        stroke(0);
-
-        const capColor = color(this.hatColor);
-        fill(capColor);
-        this.hatTipShape();
-        circle(xPosition, yPosition, this.size + 2);
-        fill(0);
-        circle(xPosition, yPosition, this.size / 6);
-        pop();
+    
+        new playerStyle(this.x,this.y,this.size,this.degres,this.hatColor).show()
         this.removeBomb();
         for (let i = 0; i < this.bombs.length; i++) {
             this.bombs[i].show();
