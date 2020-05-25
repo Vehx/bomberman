@@ -57,6 +57,9 @@
 * Simon
 * [Julia](https://github.com/Juljulia)
 * [Mark](https://github.com/deinnielle)
+* Brandon
+* Madelene
+* John
 
 ### Code Review 
 * bomb.js:17-20 - _explostionSize is not needed in the constructor if it is used as a constant variable.
