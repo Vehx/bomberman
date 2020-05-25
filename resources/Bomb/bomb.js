@@ -5,8 +5,11 @@ class Bomb {
         this.y = _y;
         //size of the bomb and fuseLength
         this.size = _size;
+        //remove
         this.FuseLength = this.size - this.size / 4.2;
         this.timer = 0;
+        this.timerSpeed = 0.019
+        //----
         this.bombgone = false;
         this.exploded = false;
         this.cords = [];
@@ -17,63 +20,6 @@ class Bomb {
         this.explostionSizeX2 = _explostionSize;
     }
 
-    //just a color function for bombshape
-    Bombcolors = (i = 0) => {
-        return color(0, 0, 5 + i * 1.2);
-    };
-
-    fuseBurn() {
-        noStroke();
-        colorMode(RGB, 255);
-        fill(color(248, 146, 0));
-        circle(
-            this.x,
-            this.y - this.FuseLength,
-            this.FuseLength - this.FuseLength * 0.92 + 2
-        );
-    }
-
-    theFuse() {
-        stroke(1);
-        strokeWeight(2);
-        strokeCap(ROUND);
-        line(this.x, this.y, this.x, this.y - this.FuseLength);
-    }
-
-    bombShapeTop() {
-        colorMode(HSL, 100);
-        noStroke();
-        const numRect = 10;
-        let shapeSize = this.size / PI;
-        for (let i = 0; i < numRect; i++) {
-            fill(this.Bombcolors(i));
-
-            rect(
-                this.x -
-                    shapeSize / 2 +
-                    (i > shapeSize ? i * 0.1 : -i) / shapeSize,
-                this.y - shapeSize + 2,
-                shapeSize - i * (shapeSize / 23.86),
-                shapeSize * (shapeSize > 3 ? -0.89 : -1.1)
-            );
-        }
-    }
-
-    bombShapeBottom() {
-        colorMode(HSL, 100);
-
-        const totalCirkels = 37;
-        for (let i = 0; i < totalCirkels; i++) {
-            noStroke();
-
-            fill(this.Bombcolors(i));
-            circle(
-                this.x - i * (this.size / 110),
-                this.y - i * (this.size / 130),
-                this.size - i * (this.size / totalCirkels)
-            );
-        }
-    }
 
     //explosion shape going along with X-axis
     explosionShowX(_width, direction) {
@@ -126,15 +72,9 @@ class Bomb {
     //the bigger the bomb is the longer it takes for it to explod)
     show() {
         push();
-        this.timer += 0.09;
+        this.timer += 0.19;
         if (this.timer < this.FuseLength / 2.2) {
-            push();
-            translate(0, this.timer);
-            this.theFuse();
-            this.fuseBurn();
-            pop();
-            this.bombShapeTop();
-            this.bombShapeBottom();
+            new Bombstyle(this.x,this.y,this.size,this.timer,this.timerSpeed).show()
         }
         if (this.timer > this.FuseLength / 2) {
             this.explosionShow(this.explostionSize);
