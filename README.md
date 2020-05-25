@@ -10,12 +10,11 @@
 ![](https://badgen.net/github/license/vehx/bomberman)
 
 # Bomberman  
-# <hr>
 ## The Game
-#### Bomberman a 2player game to challenge your friends in a boxy world and some explosion 
-#### [Link to GameSite](https://friendly-montalcini-a82d00.netlify.app/)
+#### Bomberman a 2player game to challenge your friends in a boxy world and some explosions 
+#### [Link to GameSite](https://p5-bomberman.netlify.app/)
 
-## Instalation
+## Installation
 - clone/download
 - start a development local Server, recommended live server in vscode
 
@@ -24,28 +23,28 @@
     - [x] Walk around map
     - [x] Place bomb
     - [x] Break boxes with Bomb
-    - [x] Die by Bomb explsion
+    - [x] Die by Bomb explosion
     - [x] Frendly fire
 * Start
-    - [x] Set player1 and player2 name
+    - [x] Set Player 1 and Player 2 name
     - [x] Game starts
 * Restart
     - [x] Keep players name
     - [x] New game starts
 * New game
-    - [x] Set new Player1 and Player2 name 
+    - [x] Set new Player 1 and Player 2 name 
     - [x] New game starts
 * Controls Player 1:
     - [x] Movement: Arrow keys 
     - [x] Place Bomb: Period
 * Controls Player 2: 
     - [x] Movement: WASD keys
-    - [x] PlaceBomb: Spacebar
+    - [x] Place Bomb: Spacebar
 
 
 ## Built with
 * [p5.js JavaScript library](https://p5js.org/)
-* Vanila JavaScript
+* Vanilla JavaScript
 * CSS/HTML
 
 ## Authors
