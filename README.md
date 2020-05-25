@@ -55,7 +55,9 @@
 ## Testers  
 * Louise
 * Simon
-  
+* [Julia](https://github.com/Juljulia)
+* [Mark](https://github.com/deinnielle)
+
 ### Code Review 
 * bomb.js:17-20 - _explostionSize is not needed in the constructor if it is used as a constant variable.
 * player.js:22-25 - Consider using a forEach loop when defining eachs player's keyCodes.
