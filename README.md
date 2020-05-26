@@ -10,10 +10,10 @@
 ![](https://badgen.net/github/license/vehx/bomberman)
 
 # Bomberman  
-# <hr>
+
 ## The Game
 #### Bomberman a 2player game to challenge your friends in a boxy world and some explosion 
-#### [Link to GameSite](https://friendly-montalcini-a82d00.netlify.app/)
+#### [Link to GameSite](https://p5-bomberman.netlify.app/)
 
 ## Instalation
 - clone/download
